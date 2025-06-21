@@ -1,0 +1,66 @@
+import logging
+from threading import Lock, get_ident
+
+from lib.commit_queue import SACommitQueue
+from lib.threadmeister import threadmeister
+
+
+class SACommitQueuePooler:
+    """A silly attempt to have a unique SACommitQueue per thread - i.e. a pool of queues."""
+
+    def __init__(self):
+        self._pool = {}
+        self._locker = Lock
+
+    def load(self, sql):
+
+        with self._locker():
+
+            thread_id = get_ident()
+            logging.info(f"thread id: {thread_id}")
+
+            if thread_id not in self._pool:
+                pool_q = SACommitQueue()
+                self._pool[thread_id] = pool_q
+            else:
+                pool_q = self._pool[thread_id]
+
+        pool_q.load(sql)
+
+    def save(self):
+
+        with self._locker():
+            try:
+                for pool_q in self._pool.values():
+                    pool_q.save()
+            except Exception as err:
+                self._logger.error(err)
+
+        return
+
+
+def main(total:int):
+    """commits each record with SACommitQueuePooler using raw SQL;
+    uses PostgreSQL "upsert" to check if the item already exists"""
+
+    def save(i, sacqp):
+        assert isinstance(i, int), f"{i} must be an int"
+        stmnt = f"""
+                INSERT INTO user_account (id, name)
+                VALUES ({i}, 'name_{i}')
+                ON CONFLICT (id)
+                DO UPDATE SET name = 'name_{i}';
+
+                INSERT INTO address (id, street_address, user_id)
+                VALUES ({i}, '{i} Foo St.', {i})
+                ON CONFLICT (id)
+                DO UPDATE SET street_address = '{i} Foo St.', user_id = {i};"""
+
+        sacqp.load(stmnt)
+        return
+
+    sa_commit_queue_pool = SACommitQueuePooler()
+    threadmeister(total, save, sacqp=sa_commit_queue_pool)
+    sa_commit_queue_pool.save()
+
+    return

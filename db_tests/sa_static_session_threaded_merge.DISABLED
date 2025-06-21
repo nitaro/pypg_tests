@@ -1,0 +1,24 @@
+from lib.db_functions import Session
+from lib.models import Address, User
+from lib.threadmeister import threadmeister
+
+
+def main(total:int):
+    """commits each record with a static SQLAlchemy Session using threads;
+    uses the ORM's `merge` method"""
+
+    def save(i, sess):
+        user = User(id=i, name=f"name_{i}")
+        sess.merge(user)
+        sess.commit()  # ??? WTF? See "sa_static_session_merge.py"
+        address = Address(id=i, street_address=f"{i} Foo St.", user=user)
+        sess.merge(address)
+
+        return
+
+    session = Session(autoflush=False)
+    threadmeister(total, save, sess=session)
+    session.commit()
+    session.close()
+
+    return

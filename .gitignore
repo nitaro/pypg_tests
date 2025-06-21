@@ -1,0 +1,6 @@
+.env
+_.*
+scratch*.py
+*.code-workspace
+/misc
+/results
