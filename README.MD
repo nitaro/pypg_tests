@@ -147,9 +147,7 @@ If the test script is going to execute with threads, it needs to be using the sa
 
 All this allows this "framework" to run each script as an independent test and measure its performance and memory.
 
-Each test will be executed twice. The first time will be with empty tables - i.e. inserts. After the inserts complete, the script is executed again - i.e. updates.
-
-For a simple example, see `db_tests/sa_static_session.py`.
+For a test run, each test will be executed twice. The first time will be with empty tables - i.e. inserts. After the inserts complete, the script is executed again - i.e. updates. Then all rows are dropped, clearing the way for the next test in a test run.
 
 ### Adding/Removing Tests
 
@@ -159,7 +157,7 @@ To add another test, just add another Python script in `/db_tests`. To remove a 
 
 If you want to execute a new set of test runs, say with a higher value for `TOTAL_ITEMS` then change `TOTAL_ITEMS` in `.env`, do `$ source .env` and `$ rm -fr /results` _before_ running `$ python -m main test_all`.
 
-The code doesn't aggregate normalized test run data, so it can't help you if some of your files in `/results` were based on a `TOTAL_ITEMS` value of 10 and others were done with a value of 100. So, you probably need to remove all previous data before you change values for `TOTAL_ITEMS` or `TOTAL_THREADS`.
+The code doesn't normalized test run data, so it can't help you if some of your files in `/results` were based on a `TOTAL_ITEMS` value of 10 and others were done with a value of 100. So, you probably need to remove all previous data before you change values for `TOTAL_ITEMS` or `TOTAL_THREADS`.
 
 The possible exception to this is the scatter plot which uses z-scores for duration and memory. So you might be able to intermix test runs with varied values for `TOTAL_ITEMS` or `TOTAL_THREADS` and still view the scatter plot to get a sense of what tests are "best" - i.e. those closest to the bottom left.
 
