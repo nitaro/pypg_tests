@@ -189,7 +189,7 @@ Example graphs are in ... `/example_graphs`.
 
 ## Findings and a Rant
 
-I'm consistently getting superior performance when using raw SQL statements especially with threading and especially with using a custom class to queue multiple statements in a simple, thread-safe manner that commits once the queue reaches a certain size - see `lib.commit_queue.SACommitQueue`. There also appears to be a positive correlation between performance and memory.
+I'm consistently getting superior performance when using raw SQL statements especially with threading and especially with using a custom class to queue multiple statements in a simple, thread-safe manner that commits once the queue reaches a certain size - see `lib.commit_queue.SACommitQueue`. There also appears to be a positive correlation between good performance and efficient memory.
 
 Overall, I just feel better using raw SQL because it's easier for me to _understand_ what's actually going on. In other words, there's an implicit metric lurking underneath - a sort of "comprehensibility score".
 
