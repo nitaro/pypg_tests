@@ -153,6 +153,22 @@ For a test run, each test will be executed twice. The first time will be with em
 
 To add another test, just add another Python script in `/db_tests`. To remove a test, just delete the file or rename it to have an extension other than `.py`.
 
+You can quickly execute the new test as a standalone like so:
+
+    # drop existing rows
+    $ python -m main drop_rows
+
+    # select the test's number from the dropdown
+    $ python -m main test_one   # inserts
+
+    # verify data
+    $ python -m main count_rows
+    $ python -m main print_rows
+
+    $ python -m main test_one   # updates
+    $ python -m main count_rows
+    $ python -m main print_row
+
 ### Removing Test Run Results
 
 If you want to execute a new set of test runs, say with a higher value for `TOTAL_ITEMS` then change `TOTAL_ITEMS` in `.env`, do `$ source .env` and `$ rm -fr /results` _before_ running `$ python -m main test_all`.
