@@ -65,7 +65,7 @@ Here's what each file is about:
 
 1. `conf`: a copy of the environmental variables from `.env`
     - so you know what was used for the test run
-1. `csv`: info about the test run with the following columns about each individual test
+1. `csv`: info about the test run with the following columns about each individual test:
     - `test`: (str) name of test plus the suffix "-insert" or "-update"
     - `totals`: (int, int) how many respective User and Address rows the test inserted or updated
     - `success`: (bool) if the test resulted in exactly N User rows and N Address rows, where N = the "TOTAL_ITEMS" env var
