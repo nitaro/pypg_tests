@@ -151,7 +151,7 @@ For a test run, each test will be executed twice. The first time will be with em
 
 ### Adding/Removing Tests
 
-To add another test, just add another Python script in `/db_tests`. To remove a test, just delete the file or rename it to have an extension other than `.py`.
+To add another test, just add another Python script in `/db_tests`.
 
 You can quickly execute the new test as a standalone like so:
 
@@ -168,6 +168,8 @@ You can quickly execute the new test as a standalone like so:
     $ python -m main test_one   # updates
     $ python -m main count_rows
     $ python -m main print_row
+
+To remove a test, just delete the test file or rename it to have an extension other than `.py`.
 
 ### Removing Test Run Results
 
