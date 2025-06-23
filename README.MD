@@ -196,11 +196,11 @@ After having created some test scripts in `/db_tests` that cover a few different
     $ python -m main graph
 
     # peruse the aggregated data in a spreadsheet
-    $ python -m aggregate > agg.csv
+    $ python -m main aggregate > agg.csv
     $ open agg.csv
 
     # peruse the correlated data in a spreadsheet
-    $ python -m correlate > cor.csv
+    $ python -m main correlate > cor.csv
     $ open cor.csv
 
 Example graphs are in ... `/example_graphs`.
