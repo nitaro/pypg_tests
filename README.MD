@@ -69,7 +69,7 @@ Here's what each file is about:
     - `test`: (str) name of test plus the suffix "-insert" or "-update"
     - `totals`: (int, int) how many respective User and Address rows the test inserted or updated
     - `success`: (bool) if the test resulted in exactly N User rows and N Address rows, where N = the "TOTAL_ITEMS" env var
-        - the correctness of the row _values_ are not checked
+        - the correctness of the row _values_ is not checked
     - `duration`: (float) how long the test took (seconds)
     - `memory`: (float) how much memory the test used (megabytes) according to Memray
 2. `diff`: the current Git commit and the diff (if there is one) between the commit and the actual running code
