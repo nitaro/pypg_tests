@@ -1,6 +1,6 @@
 # Python Postgres Tests: Insert or Update
 
-This is small, unruly mess (i.e. I don't care) for testing performance and memory when inserting (creating) or updating records in Postgres with Python. It's on GitHub for shiggles. You probably shouldn't use it. In fact, you should probably [read something else](https://archive.org/details/assassinationofm00weis).
+This is a small, unruly mess (i.e. I don't care) for testing performance and memory when inserting (creating) or updating records in Postgres with Python. It's on GitHub for shiggles. You probably shouldn't use it. In fact, you should probably [read something else](https://archive.org/details/assassinationofm00weis).
 
 This repo was inspired by circumstances at my current job (~mid 2025) at Fibonacci's Pizza Emporium.
 
